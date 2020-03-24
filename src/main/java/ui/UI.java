@@ -8,11 +8,11 @@ public class UI
 
     public static void main(String[]args)
     {
-        Startup();
+        menu();
     }
 
 
-    public static void Startup()
+    public static void startUp()
     {
         System.out.println("Skriv dit brugernavn og derfeter adgangskode for at fortsætte");
 
@@ -24,70 +24,98 @@ public class UI
         String Accountname = scanner.nextLine();
         String Password = scanner.nextLine();
 
-        EnterLogin(Accountname, Password);
+        enterLogin(Accountname, Password);
 
     }
 
-    public static void EnterLogin(String Accountname, String Password)
+    public static void enterLogin(String Accountname, String Password)
     {
 
         // placeholder login osv...
         if (Accountname.equals("admin") && Password.equals("admin"))
         {
             System.out.println("Velkommen, " + Accountname);
-            Menu();
+            menu();
         }
 
         else
         {
             System.out.println("Forkert adgangskode, prøv igen.");
-            Startup();
+            startUp();
         }
 
     }
 
     // Det generelle display vindue man kommer til efter login.
 
-    public static void Menu()
-    {
-        DisplayMenu();
+    // Tænker at der vil være 2 menuer, en for lederen og en for normale ansatte, hvor de normale ansatte kun kan se børn og ansatte osv... Og kun lederen kan redigerer.
 
+    public static void menu()
+    {
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Valgmuligheder \n --------------------");
+        System.out.println("1. For at se/redigerer ansatte.");
+        System.out.println("2. Vis børn.");
+        System.out.println("0. Afslut program.");
+
         int DisplayValg = scanner.nextInt();
 
         switch (DisplayValg)
         {
             case 1:
-                System.out.println("vis ansatte");
+                menuOverAnsatte();
                 break;
             case 2:
                 System.out.println("vis børn");
                 break;
             case 0:
-                System.out.println("Afslutter programmet");
+                System.out.println("Afslutter programmet...\n --------------------");
+                break;
             default:
-                System.out.println("Ukendt valg, prøv igen");
-                Menu();
+                System.out.println("Ukendt valg, prøv igen \n --------------------");
+                menu();
                 break;
         }
 
-
     }
 
-    public static void DisplayMenu()
+
+    public static void menuOverAnsatte()
     {
-        System.out.println("Tryk på følgende tast, og derefter enter for at se følgende -");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Valgmuligheder \n --------------------");
         System.out.println("1. Vis ansatte");
-        System.out.println("2. Vis børn");
-        System.out.println("...");
+        System.out.println("2. Rediger ansatte");
+        System.out.println("3. Tilbage til menuen");
+        System.out.println("0. Afslut program");
+
+        int DisplayValg = scanner.nextInt();
+
+        switch (DisplayValg)
+        {
+            case 1:
+                System.out.println("Viser ansatte...");
+                break;
+            case 2:
+                System.out.println("Redigerer ansatte...");
+                break;
+            case 3:
+                menu();
+                break;
+            case 4:
+                System.out.println("Afslutter programmet...\n --------------------");
+                break;
+            default:
+                System.out.println("Ukendt valg, prøv igen \n --------------------");
+                menu();
+                break;
+        }
+
     }
 
-    public static void DisplayAnsatte()
-    {
-        System.out.println("tesad");
-    }
-
-    public static void DisplayBørn()
+    public static void displayBørn()
     {
         System.out.println("tes");
     }
