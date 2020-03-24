@@ -2,7 +2,7 @@ package businesslayer;
 
 import java.util.ArrayList;
 
-public class venteliste
+public class Venteliste
 {
 
     ArrayList<String> børnPåVenteliste = new ArrayList<>();

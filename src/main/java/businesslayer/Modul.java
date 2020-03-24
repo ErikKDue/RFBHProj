@@ -2,7 +2,7 @@ package businesslayer;
 
 import java.util.ArrayList;
 
-public class modul
+public class Modul
 {
 
     ArrayList<String> ansatPåModul = new ArrayList<>();

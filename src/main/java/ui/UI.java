@@ -1,5 +1,8 @@
 package ui;
 
+import businesslayer.Employee;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -54,28 +57,36 @@ public class UI
     {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Valgmuligheder \n --------------------");
+        System.out.println("Valgmuligheder");
         System.out.println("1. For at se/redigerer ansatte.");
         System.out.println("2. Vis børn.");
         System.out.println("0. Afslut program.");
 
-        int DisplayValg = scanner.nextInt();
 
-        switch (DisplayValg)
+        try
         {
-            case 1:
-                menuOverAnsatte();
-                break;
-            case 2:
-                System.out.println("vis børn");
-                break;
-            case 0:
-                System.out.println("Afslutter programmet...\n --------------------");
-                break;
-            default:
-                System.out.println("Ukendt valg, prøv igen \n --------------------");
-                menu();
-                break;
+            int menuValg = scanner.nextInt();
+
+            switch (menuValg) {
+                case 1:
+                    menuOverAnsatte();
+                    break;
+                case 2:
+                    System.out.println("vis børn");
+                    break;
+                case 0:
+                    System.out.println("Afslutter programmet...\n --------------------");
+                    break;
+                default:
+                    System.out.println("Ukendt valg, prøv igen \n --------------------");
+                    menu();
+                    break;
+            }
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Ukendt valg, prøv igen \n --------------------");
+            menu();
         }
 
     }
@@ -85,39 +96,95 @@ public class UI
     {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Valgmuligheder \n --------------------");
+        System.out.println("Valgmuligheder");
         System.out.println("1. Vis ansatte");
         System.out.println("2. Rediger ansatte");
-        System.out.println("3. Tilbage til menuen");
+        System.out.println("3. Tilbage");
         System.out.println("0. Afslut program");
 
-        int DisplayValg = scanner.nextInt();
+        try {
 
-        switch (DisplayValg)
-        {
-            case 1:
-                System.out.println("Viser ansatte...");
-                break;
-            case 2:
-                System.out.println("Redigerer ansatte...");
-                break;
-            case 3:
-                menu();
-                break;
-            case 4:
-                System.out.println("Afslutter programmet...\n --------------------");
-                break;
-            default:
-                System.out.println("Ukendt valg, prøv igen \n --------------------");
-                menu();
-                break;
+            int menuOverAnsatteValg = scanner.nextInt();
+
+            switch (menuOverAnsatteValg) {
+                case 1:
+                    System.out.println("Viser ansatte...");
+                    displayAnsatte();
+                    break;
+                case 2:
+                    System.out.println("Redigerer ansatte...");
+                    redigerAnsatte();
+                    break;
+                case 3:
+                    menu();
+                    break;
+                case 0:
+                    System.out.println("Afslutter programmet...\n --------------------");
+                    break;
+                default:
+                    System.out.println("Ukendt valg, prøv igen \n --------------------");
+                    menuOverAnsatte();
+                    break;
+            }
+
         }
-
+        catch (InputMismatchException e)
+        {
+            System.out.println("Ukendt valg, prøv igen \n --------------------");
+            menuOverAnsatte();
+        }
     }
 
-    public static void displayBørn()
+    public static void displayAnsatte()
     {
-        System.out.println("tes");
+        // Her skal man kunne se alle ansatte
+    }
+
+    public static void redigerAnsatte()
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Valgmuligheder");
+        System.out.println("1. Fjern ansat");
+        System.out.println("2. Opret ansat");
+        System.out.println("3. Rediger ansat");
+        System.out.println("4. Tilbage");
+        System.out.println("0. Afslut program");
+
+        try {
+
+            int menuOverAnsatteValg = scanner.nextInt();
+
+            switch (menuOverAnsatteValg) {
+                case 1:
+                    System.out.println("Viser ansatte...");
+                    displayAnsatte();
+                    break;
+                case 2:
+                    System.out.println("Redigerer ansatte...");
+                    redigerAnsatte();
+                    break;
+                case 3:
+                    menu();
+                    break;
+                case 4:
+                    menuOverAnsatte();
+                    break;
+                case 0:
+                    System.out.println("Afslutter programmet...\n --------------------");
+                    break;
+                default:
+                    System.out.println("Ukendt valg, prøv igen \n --------------------");
+                    menuOverAnsatte();
+                    break;
+            }
+
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Ukendt valg, prøv igen \n --------------------");
+            menuOverAnsatte();
+        }
     }
 
     public static void Edit()

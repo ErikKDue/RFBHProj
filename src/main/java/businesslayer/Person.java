@@ -1,12 +1,12 @@
 package businesslayer;
 
-public class person {
+public class Person {
 
     String name;
    String lastName;
    String address;
 
-    public person(String name, String lastName, String address) {
+    public Person(String name, String lastName, String address) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;

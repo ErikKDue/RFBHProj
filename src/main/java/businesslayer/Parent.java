@@ -1,12 +1,12 @@
 package businesslayer;
 
-public class parent extends  person {
+public class Parent extends Person {
 
 
     int telefon;
     String email;
 
-    public parent(String name, String lastName, String address, int telefon, String email) {
+    public Parent(String name, String lastName, String address, int telefon, String email) {
         super(name, lastName, address);
         this.telefon = telefon;
         this.email = email;

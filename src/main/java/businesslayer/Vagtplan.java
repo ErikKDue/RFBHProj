@@ -2,7 +2,7 @@ package businesslayer;
 
 import java.util.ArrayList;
 
-public class vagtplan
+public class Vagtplan
 {
 
     ArrayList<String> dagPlan = new ArrayList<>();

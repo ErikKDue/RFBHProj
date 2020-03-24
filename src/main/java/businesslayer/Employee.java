@@ -2,12 +2,12 @@ package businesslayer;
 
 import java.util.ArrayList;
 
-public class employee extends person {
+public class Employee extends Person {
 
     boolean adminRights;
     ArrayList<String> fraværsdage = new ArrayList<>();
 
-    public employee(String name, String lastName, String address, boolean adminRights, ArrayList<String> fraværsdage) {
+    public Employee(String name, String lastName, String address, boolean adminRights, ArrayList<String> fraværsdage) {
         super(name, lastName, address);
         this.adminRights = adminRights;
         this.fraværsdage = fraværsdage;
