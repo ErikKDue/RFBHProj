@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+
 public class UI
 {
 
@@ -25,7 +26,6 @@ public class UI
 
         EnterLogin(Accountname, Password);
 
-
     }
 
     public static void EnterLogin(String Accountname, String Password)
@@ -35,7 +35,7 @@ public class UI
         if (Accountname.equals("admin") && Password.equals("admin"))
         {
             System.out.println("Velkommen, " + Accountname);
-            Display();
+            Menu();
         }
 
         else
@@ -48,27 +48,38 @@ public class UI
 
     // Det generelle display vindue man kommer til efter login.
 
-    public static void Display()
+    public static void Menu()
     {
-        Scanner scanner = new Scanner(System.in);
+        DisplayMenu();
 
+        Scanner scanner = new Scanner(System.in);
+        int DisplayValg = scanner.nextInt();
+
+        switch (DisplayValg)
+        {
+            case 1:
+                System.out.println("vis ansatte");
+                break;
+            case 2:
+                System.out.println("vis børn");
+                break;
+            case 0:
+                System.out.println("Afslutter programmet");
+            default:
+                System.out.println("Ukendt valg, prøv igen");
+                Menu();
+                break;
+        }
+
+
+    }
+
+    public static void DisplayMenu()
+    {
         System.out.println("Tryk på følgende tast, og derefter enter for at se følgende -");
         System.out.println("1. Vis ansatte");
         System.out.println("2. Vis børn");
-
-        String DisplayValg = scanner.nextLine();
-
-        if (DisplayValg.equals("1"))
-        {
-            DisplayAnsatte();
-        }
-
-        if (DisplayValg.equals("2"))
-        {
-            DisplayBørn();
-        }
-
-
+        System.out.println("...");
     }
 
     public static void DisplayAnsatte()
