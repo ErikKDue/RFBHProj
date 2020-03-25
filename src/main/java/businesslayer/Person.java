@@ -1,15 +1,21 @@
 package businesslayer;
 
-public class Person {
+import filehandler.IStorageObject;
+
+public class Person implements IStorageObject {
 
     String name;
-   String lastName;
-   String address;
+    String lastName;
+    String address;
 
     public Person(String name, String lastName, String address) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
+    }
+
+    public Person() {
+
     }
 
     public String getName() {

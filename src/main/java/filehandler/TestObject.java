@@ -1,15 +1,18 @@
 package filehandler;
 
-public class TestObject implements IStorageObject{
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName("TestObject")
+public class TestObject implements IStorageObject {
     private int testInt;
     private String testString;
     private String testName;
 
-    TestObject(){
+    TestObject() {
 
     }
 
-    TestObject( int testInt, String testString, String testName){
+    TestObject(int testInt, String testString, String testName) {
         this.testName = testName;
         this.testInt = testInt;
         this.testString = testString;
@@ -39,8 +42,4 @@ public class TestObject implements IStorageObject{
         return testInt;
     }
 
-    @Override
-    public String getType() {
-        return "TestObject";
-    }
 }

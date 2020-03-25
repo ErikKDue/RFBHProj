@@ -1,7 +1,10 @@
 package businesslayer;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.util.Arrays;
 
+@JsonTypeName("Child")
 public class Child extends Person {
 
     public int age;
@@ -11,6 +14,9 @@ public class Child extends Person {
         super(name, lastName, address);
         this.age = age;
         this.Parents = Parents;
+    }
+
+    public Child() {
     }
 
     public int getAge() {
