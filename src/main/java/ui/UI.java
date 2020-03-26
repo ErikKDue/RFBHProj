@@ -69,23 +69,28 @@ public class UI
 
             switch (menuValg) {
                 case 1:
+                    adskiller();
                     menuOverAnsatte();
                     break;
                 case 2:
-                    System.out.println("vis børn");
+                    menuOverBørn();
+                    adskiller();
                     break;
                 case 0:
-                    System.out.println("Afslutter programmet...\n --------------------");
+                    System.out.println("Afslutter programmet...");
+                    adskiller();
                     break;
                 default:
-                    System.out.println("Ukendt valg, prøv igen \n --------------------");
+                    System.out.println("Ukendt valg, prøv igen");
+                    adskiller();
                     menu();
                     break;
             }
         }
         catch (InputMismatchException e)
         {
-            System.out.println("Ukendt valg, prøv igen \n --------------------");
+            System.out.println("Ukendt valg, prøv igen");
+            adskiller();
             menu();
         }
 
@@ -108,21 +113,26 @@ public class UI
 
             switch (menuOverAnsatteValg) {
                 case 1:
+                    adskiller();
                     System.out.println("Viser ansatte...");
                     displayAnsatte();
                     break;
                 case 2:
+                    adskiller();
                     System.out.println("Redigerer ansatte...");
                     redigerAnsatte();
                     break;
                 case 3:
                     menu();
+                    adskiller();
                     break;
                 case 0:
-                    System.out.println("Afslutter programmet...\n --------------------");
+                    System.out.println("Afslutter programmet...");
+                    adskiller();
                     break;
                 default:
-                    System.out.println("Ukendt valg, prøv igen \n --------------------");
+                    System.out.println("Ukendt valg, prøv igen");
+                    adskiller();
                     menuOverAnsatte();
                     break;
             }
@@ -130,9 +140,69 @@ public class UI
         }
         catch (InputMismatchException e)
         {
-            System.out.println("Ukendt valg, prøv igen \n --------------------");
+            System.out.println("Ukendt valg, prøv igen");
+            adskiller();
             menuOverAnsatte();
         }
+    }
+
+    public static void menuOverBørn()
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Valgmuligheder");
+        System.out.println("1. Vis ansatte");
+        System.out.println("2. Rediger ansatte");
+        System.out.println("3. Tilbage");
+        System.out.println("0. Afslut program");
+
+        try {
+
+            int menuOverAnsatteValg = scanner.nextInt();
+
+            switch (menuOverAnsatteValg) {
+                case 1:
+                    adskiller();
+                    System.out.println("Viser Børn...");
+                    displayBørn();
+                    break;
+                case 2:
+                    adskiller();
+                    System.out.println("Redigerer bærn...");
+                    redigerBørn();
+                    break;
+                case 3:
+                    menu();
+                    adskiller();
+                    break;
+                case 0:
+                    System.out.println("Afslutter programmet...");
+                    adskiller();
+                    break;
+                default:
+                    System.out.println("Ukendt valg, prøv igen");
+                    adskiller();
+                    menuOverAnsatte();
+                    break;
+            }
+
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Ukendt valg, prøv igen");
+            adskiller();
+            menuOverAnsatte();
+        }
+    }
+
+    public static void displayBørn()
+    {
+
+    }
+
+    public static void redigerBørn()
+    {
+
     }
 
     public static void displayAnsatte()
@@ -169,12 +239,15 @@ public class UI
                     break;
                 case 4:
                     menuOverAnsatte();
+                    adskiller();
                     break;
                 case 0:
-                    System.out.println("Afslutter programmet...\n --------------------");
+                    System.out.println("Afslutter programmet...");
+                    adskiller();
                     break;
                 default:
-                    System.out.println("Ukendt valg, prøv igen \n --------------------");
+                    System.out.println("Ukendt valg, prøv igen");
+                    adskiller();
                     menuOverAnsatte();
                     break;
             }
@@ -182,7 +255,8 @@ public class UI
         }
         catch (InputMismatchException e)
         {
-            System.out.println("Ukendt valg, prøv igen \n --------------------");
+            System.out.println("Ukendt valg, prøv igen");
+            adskiller();
             menuOverAnsatte();
         }
     }
@@ -195,6 +269,11 @@ public class UI
     public static void DisplayUserOptions()
     {
 
+    }
+
+    public static void adskiller()
+    {
+        System.out.println("\n --------------------");
     }
 
 }
