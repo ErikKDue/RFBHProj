@@ -1,5 +1,6 @@
 package businesslayer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import filehandler.IStorageObject;
 
 public class Person implements IStorageObject {
@@ -52,11 +53,13 @@ public class Person implements IStorageObject {
     }
 
     @Override
+    @JsonIgnore
     public String getIdString() {
         return name + " " + lastName;
     }
 
     @Override
+    @JsonIgnore
     public String getStorageObjectType() {
         return "Person";
     }

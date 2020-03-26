@@ -1,5 +1,6 @@
 package filehandler;
 
+import businesslayer.Employee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -33,9 +34,17 @@ public class DataLayerApi {
 
     }
 
-    public IStorageObject retrieveIStorageObject(String identifier) {
-        Optional<IStorageObject> iStorageObjectOptional = fileHandler.readFile(hashMapHandler.crossLookup(identifier));
+    public IStorageObject retrieveIStorageObject(String identifier, String type) {
+        Optional<IStorageObject> iStorageObjectOptional = fileHandler.readFile(hashMapHandler.crossLookup(identifier, type));
         return iStorageObjectOptional.orElse(null);
     }
 
+    public int retrieveHashedPassword(String userNameInput, String type) {
+        try {
+            Employee employee = (Employee) retrieveIStorageObject(userNameInput, type);
+            return employee.hashedPassword;
+        } catch (Exception e) {
+            return -0;
+        }
+    }
 }

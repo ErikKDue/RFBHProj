@@ -76,7 +76,14 @@ public class HashMapHandler {
         }
     }
 
-    public String crossLookup(String key) {
-        return fileLocation.get(childIdMap.get(key));
+    public String crossLookup(String key, String type) {
+        switch (type) {
+            case DataLayerApi.CHILD:
+                return fileLocation.get(childIdMap.get(key));
+            case DataLayerApi.EMPLOYEE:
+                return fileLocation.get(employeeIdMap.get(key));
+            default:
+                return null;
+        }
     }
 }

@@ -24,7 +24,7 @@ public class TestBusinessLayer {
         Parent[] parents = new Parent[2];
         Child child = new Child("Martin", "Peterson", "bar", 2015, parents);
         businessLayer.saveIStorageObject(child);
-        Child child2 = (Child) businessLayer.fetchIStorageObject("Martin");
+        Child child2 = (Child) businessLayer.fetchIStorageObject("Martin", DataLayerApi.CHILD);
         Assertions.assertEquals(child.getName(), child2.getName());
     }
 

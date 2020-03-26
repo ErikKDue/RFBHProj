@@ -8,6 +8,11 @@ import java.util.Set;
 
 public class BusinessLayer {
     DataLayerApi dataLayerApi = new DataLayerApi();
+    AccountVerifier accountVerifier = new AccountVerifier();
+
+    public boolean logIn(String userNameInput, String passwordInput) {
+        return accountVerifier.verify(userNameInput, passwordInput, dataLayerApi.retrieveHashedPassword(userNameInput, DataLayerApi.EMPLOYEE));
+    }
 
     public BusinessLayer() throws IOException {
     }
@@ -20,7 +25,7 @@ public class BusinessLayer {
         dataLayerApi.addIStorageObject(object);
     }
 
-    public IStorageObject fetchIStorageObject(String identifier) {
-        return dataLayerApi.retrieveIStorageObject(identifier);
+    public IStorageObject fetchIStorageObject(String identifier, String type) {
+        return dataLayerApi.retrieveIStorageObject(identifier, type);
     }
 }

@@ -57,7 +57,7 @@ public class TestFileHandler {
         HashMapHandler hashMapHandler = new HashMapHandler();
         hashMapHandler.storeHashMapsInFile(new ObjectMapper());
         FileHandler fileHandler = new FileHandler(new ObjectMapper());
-        Employee employee = new Employee("Dolph", "Madsen", "Kronevej 1300", false, new ArrayList<String>());
+        Employee employee = new Employee("Dolph", "Madsen", "Kronevej 1300", false, new ArrayList<String>(), "Doed ved koelle!");
         fileHandler.WriteToNewFile(employee, "Employee");
         hashMapHandler.addValuesToMaps(employee, fileHandler.calculateFileLocation(employee, employee.getStorageObjectType()));
         System.out.println(hashMapHandler.getKeySetFromhashMap(DataLayerApi.EMPLOYEE));
@@ -69,7 +69,7 @@ public class TestFileHandler {
     public void when_passed_file_location_objectMapper_can_read_file() throws IOException, ClassNotFoundException {
         HashMapHandler hashMapHandler = CreateTestChildrenAndAddThemToHashMaps(new HashMapHandler());
 
-        String lel = hashMapHandler.crossLookup("Mark");
+        String lel = hashMapHandler.crossLookup("Mark", DataLayerApi.CHILD);
 
         ObjectMapper objectMapper = new ObjectMapper();
         Child object = (Child) objectMapper.readValue(new File(lel), IStorageObject.class);
@@ -84,10 +84,10 @@ public class TestFileHandler {
         hashMapHandler.storeHashMapsInFile(objectMapper);
 
         HashMapHandler retrievedHashMapHandler = new HashMapHandler();
-        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Mark"), hashMapHandler.crossLookup("Mark"));
-        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Eirikus"), hashMapHandler.crossLookup("Eirikus"));
-        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Alice"), hashMapHandler.crossLookup("Alice"));
-        Assertions.assertNotEquals(retrievedHashMapHandler.crossLookup("Alice"), hashMapHandler.crossLookup("Test"));
+        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Mark", DataLayerApi.CHILD), hashMapHandler.crossLookup("Mark", DataLayerApi.CHILD));
+        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Eirikus", DataLayerApi.CHILD), hashMapHandler.crossLookup("Eirikus", DataLayerApi.CHILD));
+        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Alice", DataLayerApi.CHILD), hashMapHandler.crossLookup("Alice", DataLayerApi.CHILD));
+        Assertions.assertNotEquals(retrievedHashMapHandler.crossLookup("Alice", DataLayerApi.CHILD), hashMapHandler.crossLookup("Test", DataLayerApi.CHILD));
 
 
     }
@@ -97,7 +97,7 @@ public class TestFileHandler {
         HashMapHandler hashMapHandler = new HashMapHandler();
         hashMapHandler.addValueToMap("Foo", "id", "Bar");
         hashMapHandler.addValueToMap("Foo2", "file", "Bar");
-        Assertions.assertEquals(hashMapHandler.crossLookup("Foo"), "Foo2");
+        Assertions.assertEquals(hashMapHandler.crossLookup("Foo", DataLayerApi.CHILD), "Foo2");
     }
 
 
@@ -105,7 +105,7 @@ public class TestFileHandler {
     public void when_given_idhashmap_and_filehashmap_and_key_look_up_file_by_value_in_idhashmap() throws IOException {
         HashMapHandler hashMapHandler = new HashMapHandler();
 
-        Assertions.assertEquals(System.getProperty("user.dir") + "\\File\\Eirikus", hashMapHandler.crossLookup("Eirikus"));
+        Assertions.assertEquals(System.getProperty("user.dir") + "\\File\\Eirikus", hashMapHandler.crossLookup("Eirikus", DataLayerApi.CHILD));
     }
 
 

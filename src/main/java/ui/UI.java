@@ -11,18 +11,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-public class UI
-{
+public class UI {
 
-    public static void main(String[]args)
-    {
-        menu();
+    public static void main(String[] args) throws IOException {
+        startUp();
     }
 
 
-    public static void startUp()
-    {
-        System.out.println("Skriv dit brugernavn og derfeter adgangskode for at fortsætte");
+    public static void startUp() throws IOException {
+        System.out.println("Skriv dit brugernavn og derefter adgangskode for at fortsætte");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -34,18 +31,13 @@ public class UI
         enterLogin(Accountname, Password);
     }
 
-    public static void enterLogin(String Accountname, String Password)
-    {
-
+    public static void enterLogin(String Accountname, String Password) throws IOException {
+        BusinessLayer businessLayer = new BusinessLayer();
         // placeholder login osv...
-        if (Accountname.equals("admin") && Password.equals("admin"))
-        {
+        if (businessLayer.logIn(Accountname, Password)) {
             System.out.println("Velkommen, " + Accountname);
             menu();
-        }
-
-        else
-        {
+        } else {
             System.out.println("Forkert adgangskode, prøv igen.");
             startUp();
         }
@@ -286,6 +278,7 @@ public class UI
         String efterNavn = "tom";
         String addresse = "tom";
         boolean adminRight = false;
+        String password = "tom";
         Parent[] parents = new Parent[2];
 
         while(true) {
@@ -294,12 +287,12 @@ public class UI
             //ArrayList<String> parents = new ArrayList<>();
 
 
-
             System.out.println("1. navn = " + navn);
             System.out.println("2. lastName = " + efterNavn);
-            System.out.println("3. adress = " + addresse);
-            System.out.println("4. Admin rettigheder = " + adminRight);
-            System.out.println("5. Opret!");
+            System.out.println("3. address = " + addresse);
+            System.out.println("4. password = " + password);
+            System.out.println("5. Admin rettigheder = " + adminRight);
+            System.out.println("6. Opret!");
             System.out.println("0. Tilbage");
 
             Scanner scanner = new Scanner(System.in);
@@ -321,13 +314,16 @@ public class UI
                         break;
                     case 4:
                         adskiller();
+                        password = scanner.next();
+                        break;
+                    case 5:
+                        adskiller();
                         System.out.println("Tryk på 1 for at give admin rettigheder, og 2 for ingen admin rettigheder");
 
-                            try
-                            {
-                                switch (scanner.nextInt()) {
-                                    case 1:
-                                        adminRight = true;
+                        try {
+                            switch (scanner.nextInt()) {
+                                case 1:
+                                    adminRight = true;
                                         break;
                                     case 2:
                                         adminRight = false;
@@ -341,9 +337,9 @@ public class UI
                                 adskiller();
                             }
 
-                    case 5:
+                    case 6:
                         BusinessLayer businessLayer = new BusinessLayer();
-                        Employee employee = new Employee(navn, efterNavn, addresse, adminRight, new ArrayList<String>());
+                        Employee employee = new Employee(navn, efterNavn, addresse, adminRight, new ArrayList<String>(), password);
 
                         businessLayer.saveIStorageObject(employee);
                         adskiller();
