@@ -6,10 +6,12 @@ import filehandler.HashMapHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 public class TestBusinessLayer {
 
     @Test
-    public void when_asked_to_display_children_call_datalayer_get_list_of_IStorageObjects() {
+    public void when_asked_to_display_children_call_datalayer_get_list_of_IStorageObjects() throws IOException {
         BusinessLayer businessLayer = new BusinessLayer();
         HashMapHandler hashMapHandler = new HashMapHandler();
         System.out.println(businessLayer.displayChildren());
@@ -17,7 +19,7 @@ public class TestBusinessLayer {
     }
 
     @Test
-    public void when_asked_to_save_child_send_to_file_handler_fetch_child() {
+    public void when_asked_to_save_child_send_to_file_handler_fetch_child() throws IOException {
         BusinessLayer businessLayer = new BusinessLayer();
         Parent[] parents = new Parent[2];
         Child child = new Child("Martin", "Peterson", "bar", 2015, parents);

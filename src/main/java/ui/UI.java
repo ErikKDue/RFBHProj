@@ -2,8 +2,11 @@ package ui;
 
 import businesslayer.BusinessLayer;
 import businesslayer.Child;
+import businesslayer.Employee;
 import businesslayer.Parent;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -13,7 +16,6 @@ public class UI
 
     public static void main(String[]args)
     {
-
         menu();
     }
 
@@ -187,16 +189,14 @@ public class UI
                     break;
             }
 
-        }
-        catch (InputMismatchException e)
-        {
+        } catch (InputMismatchException | IOException e) {
             System.out.println("Ukendt valg, prøv igen");
             adskiller();
             menuOverAnsatte();
         }
     }
 
-    public static void displayBørn() {
+    public static void displayBørn() throws IOException {
         BusinessLayer businessLayer = new BusinessLayer();
         System.out.println(businessLayer.displayChildren());
         adskiller();
@@ -213,7 +213,7 @@ public class UI
         Parent[] parents = new Parent[2];
 
         while(true) {
-            System.out.println("Vælg hvilken en af dataerne at redigerer, udfyld de tomme felter og tryk derefter på opret");
+            System.out.println("Vælg hvilken en af dataerne at redigere, udfyld de tomme felter og tryk derefter på opret");
 
             //ArrayList<String> parents = new ArrayList<>();
 
@@ -265,7 +265,7 @@ public class UI
                         break;
                 }
 
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IOException e) {
                 System.out.println("Ukendt valg, prøv igen");
                 adskiller();
                 opretBørn();
@@ -336,13 +336,17 @@ public class UI
                                         System.out.println("Ukendt valg, prøv igen");
                                         break;
                                 }
-                            } catch (InputMismatchException e)
-                            {
+                            } catch (InputMismatchException e) {
                                 System.out.println("Ukendt valg, prøv igen");
                                 adskiller();
                             }
 
                     case 5:
+                        BusinessLayer businessLayer = new BusinessLayer();
+                        Employee employee = new Employee(navn, efterNavn, addresse, adminRight, new ArrayList<String>());
+
+                        businessLayer.saveIStorageObject(employee);
+                        adskiller();
 
                     case 0:
                         adskiller();
@@ -353,7 +357,7 @@ public class UI
                         break;
                 }
 
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IOException e) {
                 System.out.println("Ukendt valg, prøv igen");
                 adskiller();
             }

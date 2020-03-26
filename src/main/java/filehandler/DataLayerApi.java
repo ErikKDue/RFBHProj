@@ -2,6 +2,7 @@ package filehandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -13,6 +14,9 @@ public class DataLayerApi {
 
     FileHandler fileHandler = new FileHandler(objectMapper);
     HashMapHandler hashMapHandler = new HashMapHandler();
+
+    public DataLayerApi() throws IOException {
+    }
 
     public Set<String> getListOfIStorageObjectIds(String identifier) {
         return hashMapHandler.getKeySetFromhashMap(identifier);

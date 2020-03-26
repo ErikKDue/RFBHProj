@@ -1,7 +1,10 @@
 package businesslayer;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.util.ArrayList;
 
+@JsonTypeName("Employee")
 public class Employee extends Person {
 
     boolean adminRights;
@@ -35,5 +38,10 @@ public class Employee extends Person {
                 "adminRights=" + adminRights +
                 ", fraværsdage=" + fraværsdage +
                 '}';
+    }
+
+    @Override
+    public String getStorageObjectType() {
+        return "Employee";
     }
 }

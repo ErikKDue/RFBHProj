@@ -1,6 +1,7 @@
 package filehandler;
 
 import businesslayer.Child;
+import businesslayer.Employee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -44,6 +45,10 @@ public class FileHandler {
             case "Child": {
                 Child child = (Child) dataType;
                 return System.getProperty("user.dir") + "\\File\\" + child.getName();
+            }
+            case "Employee": {
+                Employee employee = (Employee) dataType;
+                return System.getProperty("user.dir") + "\\File\\" + "Employee" + employee.getName();
             }
             default: {
                 throw new ClassNotFoundException("Datatype could not be matched");
