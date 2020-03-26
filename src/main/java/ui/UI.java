@@ -1,7 +1,10 @@
 package ui;
 
-import businesslayer.Employee;
+import businesslayer.Child;
+import businesslayer.Parent;
+import filehandler.FileHandler;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,6 +14,7 @@ public class UI
 
     public static void main(String[]args)
     {
+
         menu();
     }
 
@@ -21,14 +25,12 @@ public class UI
 
         Scanner scanner = new Scanner(System.in);
 
-
         //placeholder login system...
 
         String Accountname = scanner.nextLine();
         String Password = scanner.nextLine();
 
         enterLogin(Accountname, Password);
-
     }
 
     public static void enterLogin(String Accountname, String Password)
@@ -59,7 +61,7 @@ public class UI
 
         System.out.println("Valgmuligheder");
         System.out.println("1. For at se/redigerer ansatte.");
-        System.out.println("2. Vis børn.");
+        System.out.println("2. For at se/redigerer børn.");
         System.out.println("0. Afslut program.");
 
 
@@ -151,8 +153,8 @@ public class UI
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Valgmuligheder");
-        System.out.println("1. Vis ansatte");
-        System.out.println("2. Rediger ansatte");
+        System.out.println("1. Vis Børn");
+        System.out.println("2. Opret Børn");
         System.out.println("3. Tilbage");
         System.out.println("0. Afslut program");
 
@@ -168,8 +170,8 @@ public class UI
                     break;
                 case 2:
                     adskiller();
-                    System.out.println("Redigerer bærn...");
-                    redigerBørn();
+                    System.out.println("Opret barn");
+                    opretBørn();
                     break;
                 case 3:
                     menu();
@@ -200,9 +202,75 @@ public class UI
 
     }
 
-    public static void redigerBørn()
+    public static void opretBørn()
     {
 
+        String navn = "tom";
+        String efterNavn = "tom";
+        String addresse = "tom";
+        int alder = 0;
+        Parent[] parents = new Parent[2];
+
+        while(true) {
+            System.out.println("Vælg hvilken en af dataerne at redigerer, udfyld de tomme felter");
+
+            //ArrayList<String> parents = new ArrayList<>();
+
+
+
+            System.out.println("1. navn = " + navn);
+            System.out.println("2. lastName = " + efterNavn);
+            System.out.println("3. adress = " + addresse);
+            System.out.println("4. year = " + alder);
+            System.out.println("5. Opret!");
+            System.out.println("0. Tilbage");
+
+            Scanner scanner = new Scanner(System.in);
+
+            try {
+
+                switch (scanner.nextInt()) {
+                    case 1:
+                        adskiller();
+                        navn = scanner.next();
+                        break;
+                    case 2:
+                        adskiller();
+                        efterNavn = scanner.next();
+                        break;
+                    case 3:
+                        adskiller();
+                        addresse = scanner.next();
+                        break;
+                    case 4:
+                        adskiller();
+                        alder = scanner.nextInt();
+                        break;
+                    case 5:
+                        FileHandler fileHandler = new FileHandler();
+                        Child child = new Child(navn, efterNavn, addresse, alder, parents);
+
+                        fileHandler.WriteToNewFile(child, "Child");
+                        adskiller();
+
+                    case 0:
+                        menuOverBørn();
+                        adskiller();
+                        break;
+                    default:
+                        System.out.println("Ukendt valg, prøv igen");
+                        adskiller();
+                        opretBørn();
+                        break;
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Ukendt valg, prøv igen");
+                adskiller();
+                opretBørn();
+            }
+
+        }
     }
 
     public static void displayAnsatte()
