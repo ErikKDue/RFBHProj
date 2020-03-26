@@ -4,7 +4,6 @@ import businesslayer.Child;
 import businesslayer.Parent;
 import filehandler.FileHandler;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -121,8 +120,8 @@ public class UI
                     break;
                 case 2:
                     adskiller();
-                    System.out.println("Redigerer ansatte...");
-                    redigerAnsatte();
+                    System.out.println("Opret ansat");
+                    opretAnsatte();
                     break;
                 case 3:
                     menu();
@@ -212,7 +211,7 @@ public class UI
         Parent[] parents = new Parent[2];
 
         while(true) {
-            System.out.println("Vælg hvilken en af dataerne at redigerer, udfyld de tomme felter");
+            System.out.println("Vælg hvilken en af dataerne at redigerer, udfyld de tomme felter og tryk derefter på opret");
 
             //ArrayList<String> parents = new ArrayList<>();
 
@@ -278,54 +277,85 @@ public class UI
         // Her skal man kunne se alle ansatte
     }
 
-    public static void redigerAnsatte()
+    public static void opretAnsatte()
     {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Valgmuligheder");
-        System.out.println("1. Fjern ansat");
-        System.out.println("2. Opret ansat");
-        System.out.println("3. Rediger ansat");
-        System.out.println("4. Tilbage");
-        System.out.println("0. Afslut program");
+        String navn = "tom";
+        String efterNavn = "tom";
+        String addresse = "tom";
+        boolean adminRight = false;
+        Parent[] parents = new Parent[2];
 
-        try {
+        while(true) {
+            System.out.println("Vælg hvilken en af dataerne at redigerer, udfyld de tomme felter og tryk derefter på opret");
 
-            int menuOverAnsatteValg = scanner.nextInt();
+            //ArrayList<String> parents = new ArrayList<>();
 
-            switch (menuOverAnsatteValg) {
-                case 1:
-                    System.out.println("Viser ansatte...");
-                    displayAnsatte();
-                    break;
-                case 2:
-                    System.out.println("Redigerer ansatte...");
-                    redigerAnsatte();
-                    break;
-                case 3:
-                    menu();
-                    break;
-                case 4:
-                    menuOverAnsatte();
-                    adskiller();
-                    break;
-                case 0:
-                    System.out.println("Afslutter programmet...");
-                    adskiller();
-                    break;
-                default:
-                    System.out.println("Ukendt valg, prøv igen");
-                    adskiller();
-                    menuOverAnsatte();
-                    break;
+
+
+            System.out.println("1. navn = " + navn);
+            System.out.println("2. lastName = " + efterNavn);
+            System.out.println("3. adress = " + addresse);
+            System.out.println("4. Admin rettigheder = " + adminRight);
+            System.out.println("5. Opret!");
+            System.out.println("0. Tilbage");
+
+            Scanner scanner = new Scanner(System.in);
+
+            try {
+
+                switch (scanner.nextInt()) {
+                    case 1:
+                        adskiller();
+                        navn = scanner.next();
+                        break;
+                    case 2:
+                        adskiller();
+                        efterNavn = scanner.next();
+                        break;
+                    case 3:
+                        adskiller();
+                        addresse = scanner.next();
+                        break;
+                    case 4:
+                        adskiller();
+                        System.out.println("Tryk på 1 for at give admin rettigheder, og 2 for ingen admin rettigheder");
+
+                            try
+                            {
+                                switch (scanner.nextInt()) {
+                                    case 1:
+                                        adminRight = true;
+                                        break;
+                                    case 2:
+                                        adminRight = false;
+                                        break;
+                                    default:
+                                        System.out.println("Ukendt valg, prøv igen");
+                                        break;
+                                }
+                            } catch (InputMismatchException e)
+                            {
+                                System.out.println("Ukendt valg, prøv igen");
+                                adskiller();
+                            }
+
+                    case 5:
+
+                    case 0:
+                        adskiller();
+                        break;
+                    default:
+                        System.out.println("Ukendt valg, prøv igen");
+                        adskiller();
+                        break;
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Ukendt valg, prøv igen");
+                adskiller();
             }
 
-        }
-        catch (InputMismatchException e)
-        {
-            System.out.println("Ukendt valg, prøv igen");
-            adskiller();
-            menuOverAnsatte();
         }
     }
 
