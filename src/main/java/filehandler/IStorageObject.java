@@ -13,4 +13,10 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
         @JsonSubTypes.Type(value = Child.class, name = "Child")
 })
 public interface IStorageObject {
+
+    public String getIdString();
+
+    public String getName();
+
+    public String getStorageObjectType();
 }

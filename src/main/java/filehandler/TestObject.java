@@ -42,4 +42,19 @@ public class TestObject implements IStorageObject {
         return testInt;
     }
 
+    @Override
+    public String getIdString() {
+        return testName + testString;
+    }
+
+    @Override
+    public String getName() {
+        return testName;
+    }
+
+    @Override
+    public String getStorageObjectType() {
+        return "TestObject";
+    }
+
 }

@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.UUID;
 
 public class FileHandler {
     ObjectMapper objectMapper = new ObjectMapper();
@@ -17,7 +16,7 @@ public class FileHandler {
             File newFile = new File(calculateFileLocation(contents, type));
             if (newFile.createNewFile()) {
                 objectMapper.writeValue(newFile, contents);
-                return Optional.of(expectedReturnValue(contents, type));
+                return Optional.of("File created!");
             } else {
                 return Optional.of("File already exists, could not create");
             }
@@ -27,6 +26,8 @@ public class FileHandler {
         return Optional.of("Failed to create file");
     }
 
+    //if I add a getStorageName method to IStorageObject
+    //it can just be "return "C\\Work\\" +testObject.getType() + "\\" +testObject.getStorageName()"
     public String calculateFileLocation(IStorageObject dataType, String type) throws ClassNotFoundException {
         switch (type) {
             case "TestObject":
@@ -44,12 +45,6 @@ public class FileHandler {
         }
     }
 
-    public String expectedReturnValue(IStorageObject dataType, String type) throws ClassNotFoundException {
-        String fileLocation = calculateFileLocation(dataType, type);
-        UUID uuid = UUID.randomUUID();
-
-        return uuid + "--" + fileLocation;
-    }
 
     public IStorageObject readFile(String identifier) throws JsonProcessingException {
         return objectMapper.readValue(findFileLocation(identifier), IStorageObject.class);

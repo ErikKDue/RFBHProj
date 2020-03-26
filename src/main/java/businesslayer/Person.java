@@ -17,7 +17,7 @@ public class Person implements IStorageObject {
     public Person() {
 
     }
-
+    @Override
     public String getName() {
         return name;
     }
@@ -50,4 +50,15 @@ public class Person implements IStorageObject {
                 ", address='" + address + '\'' +
                 '}';
     }
+
+    @Override
+    public String getIdString() {
+        return name + " " + lastName;
+    }
+
+    @Override
+    public String getStorageObjectType() {
+        return "Person";
+    }
+
 }
