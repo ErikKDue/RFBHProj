@@ -35,17 +35,18 @@ public class TestFileHandler {
         fileHandler.WriteToNewFile(child4, "Child");
         fileHandler.WriteToNewFile(child5, "Child");
         fileHandler.WriteToNewFile(child6, "Child");
-        hashMapHandler.addValueToMap("C:\\Work\\" + child.getName(), "file", child.getName() + child.getLastName());
-        hashMapHandler.addValueToMap("C:\\Work\\" + child2.getName(), "file", "2");
-        hashMapHandler.addValueToMap("C:\\Work\\" + child3.getName(), "file", "3");
-        hashMapHandler.addValueToMap("C:\\Work\\" + child4.getName(), "file", "4");
-        hashMapHandler.addValueToMap("C:\\Work\\" + child5.getName(), "file", "5");
+        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child.getName(), "file", child.getName() + child.getLastName());
+        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child2.getName(), "file", "2");
+        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child3.getName(), "file", "3");
+        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child4.getName(), "file", "4");
+        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child5.getName(), "file", "5");
         hashMapHandler.addValueToMap(child.getName(), "id", child.getName() + child.getLastName());
         hashMapHandler.addValueToMap(child2.getName(), "id", "2");
         hashMapHandler.addValueToMap(child3.getName(), "id", "3");
         hashMapHandler.addValueToMap(child4.getName(), "id", "4");
         hashMapHandler.addValueToMap(child5.getName(), "id", "5");
         hashMapHandler.addValuesToMaps(child6, fileHandler.calculateFileLocation(child6, child6.getStorageObjectType()));
+        hashMapHandler.getKeySetFromhashMap("Mref");
         return hashMapHandler;
     }
 
@@ -56,20 +57,23 @@ public class TestFileHandler {
         String lel = hashMapHandler.crossLookup("Mark");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        IStorageObject object = objectMapper.readValue(new File(lel), IStorageObject.class);
+        Child object = (Child) objectMapper.readValue(new File(lel), IStorageObject.class);
+        Assertions.assertEquals("Mark", object.getName());
+        Assertions.assertEquals("Mellemved", object.getAddress());
     }
 
     @Test
     public void hashMaps_Saved_After_Use() throws ClassNotFoundException, IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
         HashMapHandler hashMapHandler = CreateTestChildrenAndAddThemToHashMaps(new HashMapHandler());
-        hashMapHandler.storeHashMapsInFile(new ObjectMapper());
+        hashMapHandler.storeHashMapsInFile(objectMapper);
 
+        HashMapHandler retrievedHashMapHandler = new HashMapHandler();
+        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Mark"), hashMapHandler.crossLookup("Mark"));
+        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Eirikus"), hashMapHandler.crossLookup("Eirikus"));
+        Assertions.assertEquals(retrievedHashMapHandler.crossLookup("Alice"), hashMapHandler.crossLookup("Alice"));
+        Assertions.assertNotEquals(retrievedHashMapHandler.crossLookup("Alice"), hashMapHandler.crossLookup("Test"));
 
-    }
-
-    @Test
-    public void test_if_HashMapHandler_Loads_HashMaps_Correctly_From_File() {
-        HashMapHandler hashMapHandler = new HashMapHandler();
 
     }
 
@@ -82,14 +86,17 @@ public class TestFileHandler {
     }
 
 
-
     @Test
     public void when_given_idhashmap_and_filehashmap_and_key_look_up_file_by_value_in_idhashmap() {
-//        IdGenerator idGenerator = new IdGenerator();
-//        HashMapHandler hashMapHandler = new HashMapHandler();
-//        hashMapHandler.addValueToMap("ErikFileLocation","file");
-//        hashMapHandler.addValueToMap("Erik","id");
-//
-//        String lel = hashMapHandler.crossLookup("Erik");
+        HashMapHandler hashMapHandler = new HashMapHandler();
+
+        Assertions.assertEquals(System.getProperty("user.dir") + "\\File\\Eirikus", hashMapHandler.crossLookup("Eirikus"));
+    }
+
+
+    ///(System.getProperty("user.dir")+"\\Files
+    @Test
+    public void relativePathTest() {
+        System.out.println(System.getProperty("user.dir"));
     }
 }

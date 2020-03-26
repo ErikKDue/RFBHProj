@@ -1,6 +1,8 @@
 package businesslayer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import filehandler.DataLayerApi;
 
 import java.util.Arrays;
 
@@ -45,12 +47,14 @@ public class Child extends Person {
     }
 
     @Override
+    @JsonIgnore
     public String getIdString() {
         return name + " " + lastName + " " + year;
     }
 
     @Override
+    @JsonIgnore
     public String getStorageObjectType() {
-        return "Child";
+        return DataLayerApi.CHILD;
     }
 }

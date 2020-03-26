@@ -1,7 +1,6 @@
 package filehandler;
 
 import businesslayer.Child;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -32,11 +31,11 @@ public class FileHandler {
         switch (type) {
             case "TestObject":
                 TestObject testObject = (TestObject) dataType;
-                return "C:\\Work\\" + testObject.getTestName();
+                return System.getProperty("user.dir") + "\\File\\" + testObject.getTestName();
 
             case "Child": {
                 Child child = (Child) dataType;
-                return "C:\\Work\\" + child.getName();
+                return System.getProperty("user.dir") + "\\File\\" + child.getName();
             }
             default: {
                 throw new ClassNotFoundException("Datatype could not be matched");
@@ -46,13 +45,12 @@ public class FileHandler {
     }
 
 
-    public IStorageObject readFile(String identifier) throws JsonProcessingException {
-        return objectMapper.readValue(findFileLocation(identifier), IStorageObject.class);
+    public Optional<IStorageObject> readFile(String fileLocation) {
+        try {
+            return Optional.of(objectMapper.readValue(new File(fileLocation), IStorageObject.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
-
-    //Check HashMaps!
-    public String findFileLocation(String identifier) {
-        return "FileLocation";
-    }
-
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashMapHandler {
     IdGenerator idGenerator = new IdGenerator();
@@ -15,16 +16,16 @@ public class HashMapHandler {
     public HashMapHandler() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            fileLocation = objectMapper.readValue(new File("C:\\Work\\HashMaps\\FileLocation"), HashMap.class);
-            idmap = objectMapper.readValue(new File("C:\\Work\\HashMaps\\IDMAP"), HashMap.class);
+            fileLocation = objectMapper.readValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\FileLocation"), HashMap.class);
+            idmap = objectMapper.readValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\IDMAP"), HashMap.class);
         } catch (IOException e) {
             System.out.println("File Not Found");
         }
     }
 
     public void storeHashMapsInFile(ObjectMapper objectMapper) throws IOException {
-        objectMapper.writeValue(new File("C:\\Work\\HashMaps\\FileLocation"), fileLocation);
-        objectMapper.writeValue(new File("C:\\Work\\HashMaps\\IDMAP"), idmap);
+        objectMapper.writeValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\FileLocation"), fileLocation);
+        objectMapper.writeValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\IDMAP"), idmap);
 
     }
 
@@ -47,6 +48,15 @@ public class HashMapHandler {
 
     public void removeValueToMap(Integer key, String map) {
 
+    }
+
+    public Set<String> getKeySetFromhashMap(String mapIdentifier) {
+        switch (mapIdentifier) {
+            case DataLayerApi.CHILD:
+                return idmap.keySet();
+            default:
+                return fileLocation.keySet();
+        }
     }
 
     public String crossLookup(String key) {
