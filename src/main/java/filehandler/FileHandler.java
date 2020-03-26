@@ -8,7 +8,15 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class FileHandler {
-    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper;
+
+    public FileHandler(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    public FileHandler() {
+
+    }
 
     public Optional<String> WriteToNewFile(IStorageObject contents, String type) {
         try {

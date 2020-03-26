@@ -18,7 +18,7 @@ public class TestFileHandler {
 
     private HashMapHandler CreateTestChildrenAndAddThemToHashMaps(HashMapHandler hashMapHandler) throws ClassNotFoundException {
         Parent[] parents = new Parent[2];
-        FileHandler fileHandler = new FileHandler();
+        FileHandler fileHandler = new FileHandler(new ObjectMapper());
         Child child = new Child("Test", "Child", "bar", 17, parents);
         Child child2 = new Child("Tester", "Child2", "Rumlebef", 12, parents);
         fileHandler.WriteToNewFile(child, "Child");

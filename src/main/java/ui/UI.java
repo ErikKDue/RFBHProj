@@ -1,8 +1,8 @@
 package ui;
 
+import businesslayer.BusinessLayer;
 import businesslayer.Child;
 import businesslayer.Parent;
-import filehandler.FileHandler;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -196,9 +196,11 @@ public class UI
         }
     }
 
-    public static void displayBørn()
-    {
-
+    public static void displayBørn() {
+        BusinessLayer businessLayer = new BusinessLayer();
+        System.out.println(businessLayer.displayChildren());
+        adskiller();
+        menuOverBørn();
     }
 
     public static void opretBørn()
@@ -246,10 +248,10 @@ public class UI
                         alder = scanner.nextInt();
                         break;
                     case 5:
-                        FileHandler fileHandler = new FileHandler();
+                        BusinessLayer businessLayer = new BusinessLayer();
                         Child child = new Child(navn, efterNavn, addresse, alder, parents);
 
-                        fileHandler.WriteToNewFile(child, "Child");
+                        businessLayer.saveIStorageObject(child);
                         adskiller();
 
                     case 0:
