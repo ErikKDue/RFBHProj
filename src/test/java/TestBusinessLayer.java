@@ -27,5 +27,4 @@ public class TestBusinessLayer {
         Child child2 = (Child) businessLayer.fetchIStorageObject("Martin", DataLayerApi.CHILD);
         Assertions.assertEquals(child.getName(), child2.getName());
     }
-
 }

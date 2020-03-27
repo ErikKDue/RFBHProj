@@ -4,6 +4,7 @@ import businesslayer.BusinessLayer;
 import businesslayer.Child;
 import businesslayer.Employee;
 import businesslayer.Parent;
+import filehandler.DataLayerApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -227,7 +228,7 @@ public class UI {
                     //find the kid by input
                     //throws an exception but still works wtf
                     try {
-                        Child child = (Child) businessLayer.fetchIStorageObject(input, "Child");
+                        Child child = (Child) businessLayer.fetchIStorageObject(input, DataLayerApi.CHILD);
                         navn = child.getName() + " " + child.getLastName();
                         addresse = child.getAddress();
                         year = child.getYear();

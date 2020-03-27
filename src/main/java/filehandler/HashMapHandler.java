@@ -17,9 +17,9 @@ public class HashMapHandler {
     public HashMapHandler() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            fileLocation = objectMapper.readValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\FileLocation"), HashMap.class);
-            childIdMap = objectMapper.readValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\IDMAP"), HashMap.class);
-            employeeIdMap = objectMapper.readValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\EmployeeIDMap"), HashMap.class);
+            fileLocation = objectMapper.readValue(new File(".\\File\\HashMaps\\FileLocation"), HashMap.class);
+            childIdMap = objectMapper.readValue(new File(".\\File\\HashMaps\\IDMAP"), HashMap.class);
+            employeeIdMap = objectMapper.readValue(new File(".\\File\\HashMaps\\EmployeeIDMap"), HashMap.class);
         } catch (IOException e) {
             storeHashMapsInFile(objectMapper);
             System.out.println("File Not Found, creating new file");
@@ -27,9 +27,9 @@ public class HashMapHandler {
     }
 
     public void storeHashMapsInFile(ObjectMapper objectMapper) throws IOException {
-        objectMapper.writeValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\FileLocation"), fileLocation);
-        objectMapper.writeValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\IDMAP"), childIdMap);
-        objectMapper.writeValue(new File(System.getProperty("user.dir") + "\\File\\HashMaps\\EmployeeIDMap"), employeeIdMap);
+        objectMapper.writeValue(new File(".\\File\\HashMaps\\FileLocation"), fileLocation);
+        objectMapper.writeValue(new File(".\\File\\HashMaps\\IDMAP"), childIdMap);
+        objectMapper.writeValue(new File(".\\File\\HashMaps\\EmployeeIDMap"), employeeIdMap);
 
     }
 

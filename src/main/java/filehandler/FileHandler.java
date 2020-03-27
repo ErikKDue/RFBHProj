@@ -40,15 +40,15 @@ public class FileHandler {
         switch (type) {
             case "TestObject":
                 TestObject testObject = (TestObject) dataType;
-                return System.getProperty("user.dir") + "\\File\\" + testObject.getTestName();
+                return ".\\File\\" + testObject.getTestName();
 
             case "Child": {
                 Child child = (Child) dataType;
-                return System.getProperty("user.dir") + "\\File\\" + child.getName();
+                return ".\\File\\" + child.getName();
             }
             case "Employee": {
                 Employee employee = (Employee) dataType;
-                return System.getProperty("user.dir") + "\\File\\" + "Employee" + employee.getName();
+                return ".\\File\\" + "Employee" + employee.getName();
             }
             default: {
                 throw new ClassNotFoundException("Datatype could not be matched");
@@ -62,7 +62,6 @@ public class FileHandler {
         try {
             return Optional.of(objectMapper.readValue(new File(fileLocation), IStorageObject.class));
         } catch (Exception e) {
-            e.printStackTrace();
             return Optional.empty();
         }
     }

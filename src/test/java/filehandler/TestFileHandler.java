@@ -37,11 +37,11 @@ public class TestFileHandler {
         fileHandler.WriteToNewFile(child4, "Child");
         fileHandler.WriteToNewFile(child5, "Child");
         fileHandler.WriteToNewFile(child6, "Child");
-        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child.getName(), "file", child.getName() + child.getLastName());
-        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child2.getName(), "file", "2");
-        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child3.getName(), "file", "3");
-        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child4.getName(), "file", "4");
-        hashMapHandler.addValueToMap(System.getProperty("user.dir") + "\\File\\" + child5.getName(), "file", "5");
+        hashMapHandler.addValueToMap(".\\File\\" + child.getName(), "file", child.getName() + child.getLastName());
+        hashMapHandler.addValueToMap(".\\File\\" + child2.getName(), "file", "2");
+        hashMapHandler.addValueToMap(".\\File\\" + child3.getName(), "file", "3");
+        hashMapHandler.addValueToMap(".\\File\\" + child4.getName(), "file", "4");
+        hashMapHandler.addValueToMap(".\\File\\" + child5.getName(), "file", "5");
         hashMapHandler.addValueToMap(child.getName(), "id", child.getName() + child.getLastName());
         hashMapHandler.addValueToMap(child2.getName(), "id", "2");
         hashMapHandler.addValueToMap(child3.getName(), "id", "3");
@@ -105,13 +105,13 @@ public class TestFileHandler {
     public void when_given_idhashmap_and_filehashmap_and_key_look_up_file_by_value_in_idhashmap() throws IOException {
         HashMapHandler hashMapHandler = new HashMapHandler();
 
-        Assertions.assertEquals(System.getProperty("user.dir") + "\\File\\Eirikus", hashMapHandler.crossLookup("Eirikus", DataLayerApi.CHILD));
+        Assertions.assertEquals(".\\File\\Eirikus", hashMapHandler.crossLookup("Eirikus", DataLayerApi.CHILD));
     }
 
 
-    ///(System.getProperty("user.dir")+"\\Files
+    ///(".\\Files
     @Test
     public void relativePathTest() {
-        System.out.println(System.getProperty("user.dir"));
+        System.out.println(".\\File\\");
     }
 }
