@@ -21,6 +21,10 @@ public class BusinessLayer {
         return dataLayerApi.getListOfIStorageObjectIds(DataLayerApi.CHILD);
     }
 
+    public Set<String> displayEmployees() {
+        return dataLayerApi.getListOfIStorageObjectIds(DataLayerApi.EMPLOYEE);
+    }
+
     public void saveIStorageObject(IStorageObject object) {
         dataLayerApi.addIStorageObject(object);
     }

@@ -23,8 +23,6 @@ public class UI {
 
         Scanner scanner = new Scanner(System.in);
 
-        //placeholder login system...
-
         String Accountname = scanner.nextLine();
         String Password = scanner.nextLine();
 
@@ -133,22 +131,21 @@ public class UI {
             }
 
         }
-        catch (InputMismatchException e)
-        {
+        catch (InputMismatchException | IOException e) {
             System.out.println("Ukendt valg, prøv igen");
             adskiller();
             menuOverAnsatte();
         }
     }
 
-    public static void menuOverBørn()
-    {
+    public static void menuOverBørn() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Valgmuligheder");
-        System.out.println("1. Vis Børn");
-        System.out.println("2. Opret Børn");
-        System.out.println("3. Tilbage");
+        System.out.println("1. Vis Alle Børn");
+        System.out.println("2. Vis Enkelt Barn");
+        System.out.println("3. Opret Barn");
+        System.out.println("4. Tilbage");
         System.out.println("0. Afslut program");
 
         try {
@@ -163,10 +160,15 @@ public class UI {
                     break;
                 case 2:
                     adskiller();
+                    System.out.println("Viser enkelt barn");
+                    displayBarn();
+                    break;
+                case 3:
+                    adskiller();
                     System.out.println("Opret barn");
                     opretBørn();
                     break;
-                case 3:
+                case 4:
                     menu();
                     adskiller();
                     break;
@@ -195,8 +197,54 @@ public class UI {
         menuOverBørn();
     }
 
-    public static void opretBørn()
-    {
+    public static void displayBarn() throws IOException {
+        String navn = "tom";
+        String addresse = "tom";
+        int year = 0;
+        Parent[] parents = new Parent[2];
+
+        boolean running = true;
+
+        BusinessLayer businessLayer = new BusinessLayer();
+
+        while (running == true) {
+            System.out.println(" navn = " + navn);
+            System.out.println(" adress = " + addresse);
+            System.out.println(" year = " + year);
+
+            System.out.println("Indtast barnets fornavn, eller \"0\" for at afslutte. ");
+
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.next();
+            switch (input) {
+                case "0":
+                    running = false;
+                    break;
+                case "":
+                    System.out.println("Tomt input.");
+                    break;
+                default:
+                    //find the kid by input
+                    //throws an exception but still works wtf
+                    try {
+                        Child child = (Child) businessLayer.fetchIStorageObject(input, "Child");
+                        navn = child.getName() + " " + child.getLastName();
+                        addresse = child.getAddress();
+                        year = child.getYear();
+                    } catch (Exception npe) {
+                        System.out.println("Ingen børn med det navn.");
+                    }
+
+                    break;
+
+            }
+
+        }
+        adskiller();
+        menuOverBørn();
+    }
+
+    public static void opretBørn() {
 
         String navn = "tom";
         String efterNavn = "tom";
@@ -266,13 +314,15 @@ public class UI {
         }
     }
 
-    public static void displayAnsatte()
-    {
-        // Her skal man kunne se alle ansatte
+    public static void displayAnsatte() throws IOException {
+        BusinessLayer businessLayer = new BusinessLayer();
+        System.out.println(businessLayer.displayEmployees());
+        adskiller();
+        menuOverBørn();
     }
 
-    public static void opretAnsatte()
-    {
+
+    public static void opretAnsatte() {
 
         String navn = "tom";
         String efterNavn = "tom";

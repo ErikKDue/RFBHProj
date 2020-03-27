@@ -22,6 +22,14 @@ public class Child extends Person {
     public Child() {
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public int getAge() {
         return age;
     }
