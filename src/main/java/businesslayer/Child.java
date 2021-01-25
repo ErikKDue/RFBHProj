@@ -7,7 +7,7 @@ import filehandler.DataLayerApi;
 import java.util.Arrays;
 
 @JsonTypeName("Child")
-//comment to force rebuild v2
+//comment to force rebuild v3
 public class Child extends Person {
 
     public int age;
