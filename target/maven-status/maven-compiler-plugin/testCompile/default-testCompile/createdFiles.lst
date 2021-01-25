@@ -1,1 +1,4 @@
+ui\TestUI.class
+TestBusinessLayer.class
+TestLogin.class
 filehandler\TestFileHandler.class

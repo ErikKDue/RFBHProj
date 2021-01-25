@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -57,12 +59,19 @@ public class TestFileHandler {
         HashMapHandler hashMapHandler = new HashMapHandler();
         hashMapHandler.storeHashMapsInFile(new ObjectMapper());
         FileHandler fileHandler = new FileHandler(new ObjectMapper());
-        Employee employee = new Employee("Dolph", "Madsen", "Kronevej 1300", false, new ArrayList<String>(), "Doed ved koelle!");
+        Employee employee = new Employee("Dolph", "Madsen", "Kronevej 1300", false, new ArrayList<String>(), "1234");
         fileHandler.WriteToNewFile(employee, "Employee");
         hashMapHandler.addValuesToMaps(employee, fileHandler.calculateFileLocation(employee, employee.getStorageObjectType()));
         System.out.println(hashMapHandler.getKeySetFromhashMap(DataLayerApi.EMPLOYEE));
         hashMapHandler.storeHashMapsInFile(new ObjectMapper());
 
+    }
+
+    @Test
+    public void testFile() throws IOException {
+        File file = new File(".\\File\\EmployeeJohn");
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println(objectMapper.readValue(file, Employee.class).getHashedPassword());
     }
 
     @Test

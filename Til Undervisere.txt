@@ -1,0 +1,5 @@
+Login er "John" med password "1234".
+
+Kendte fejl;
+Børn kan nogen gange ikke findes efter at være oprettet. Muligvis løst efter vi slettede og lavede nye hashmaps? Har ikke set den siden vi viste programmet frem i fredags.
+Dele a UIen går i en uendelig løkke i stedet for at vende tilbage til hovedmenuen når man trykker 0. Vi har fundet en løsning, men den er kun blevet implementeret i nogen af metoderne.
