@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 public class TestBusinessLayer {
-
+/*
     @Test
     public void when_asked_to_display_children_call_datalayer_get_list_of_IStorageObjects() throws IOException {
         BusinessLayer businessLayer = new BusinessLayer();
@@ -26,5 +26,5 @@ public class TestBusinessLayer {
         businessLayer.saveIStorageObject(child);
         Child child2 = (Child) businessLayer.fetchIStorageObject("Martin", DataLayerApi.CHILD);
         Assertions.assertEquals(child.getName(), child2.getName());
-    }
+    }*/
 }
